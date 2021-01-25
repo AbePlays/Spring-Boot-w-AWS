@@ -42,6 +42,12 @@ const UserProfile = ({ userProfiles }) => {
       {userProfiles.map((userProfile) => {
         return (
           <div key={userProfile.userProfileId}>
+            {userProfile.userProfileId ? (
+              <img
+                alt="user"
+                src={`http://localhost:8080/api/v1/user-profile/${userProfile.userProfileId}/image/download`}
+              />
+            ) : null}
             <h1>{userProfile.userName}</h1>
             <p>{userProfile.userProfileId}</p>
             <Dropzone userProfileId={userProfile.userProfileId} />
