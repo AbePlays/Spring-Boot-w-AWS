@@ -1,9 +1,24 @@
-import UserProfiles from "./components/UserProfile";
+import { useState, useEffect } from "react";
+
+import UserProfile from "./components/UserProfile";
 
 const App = () => {
+  const [userProfiles, setUserProfiles] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("http://localhost:8080/api/v1/user-profile");
+      const data = await res.json();
+      setUserProfiles(data);
+      console.log(data);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div>
-      <UserProfiles />
+      <UserProfile userProfiles={userProfiles} />
     </div>
   );
 };
