@@ -43,6 +43,7 @@ const UserProfile = ({ userProfiles }) => {
         return (
           <div key={userProfile.userProfileId}>
             <h1>{userProfile.userName}</h1>
+            <p>{userProfile.userProfileId}</p>
             <Dropzone userProfileId={userProfile.userProfileId} />
           </div>
         );
