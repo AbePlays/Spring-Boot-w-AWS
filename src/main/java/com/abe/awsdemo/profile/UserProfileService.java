@@ -31,7 +31,10 @@ public class UserProfileService {
             throw new IllegalStateException("Cannot upload empty file");
         }
 
-        if(!Arrays.asList(ContentType.IMAGE_JPEG, ContentType.IMAGE_PNG, ContentType.IMAGE_GIF).contains(file.getContentType())) {
+        if(!Arrays.asList(
+                ContentType.IMAGE_JPEG.getMimeType(),
+                ContentType.IMAGE_PNG.getMimeType(),
+                ContentType.IMAGE_GIF.getMimeType()).contains(file.getContentType())) {
             throw new IllegalStateException("Invalid file type");
         }
 
@@ -47,7 +50,7 @@ public class UserProfileService {
         metaData.put("Content-Length", String.valueOf(file.getSize()));
 
         String path = String.format("%s/%s", BucketName.PROFILE_IMAGE.getBucketName(), user.getUserProfileId());
-        String fileName = String.format("%s-%s", file.getName(), UUID.randomUUID());
+        String fileName = String.format("%s-%s", file.getOriginalFilename(), UUID.randomUUID());
 
         try {
             fileStore.save(path, fileName, Optional.of(metaData), file.getInputStream());
